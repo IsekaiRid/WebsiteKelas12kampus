@@ -2,14 +2,14 @@ const EMOJI_DEFAULT = '✨'; // emoji untuk anggota yang tidak punya emoji sendi
 
 const anggota = [
     { nama: 'MUHAMAD IHSAN AL ARABI', peran: 'Ketua Kelas', motivasi: 'Diawali dengan bismillah Diakhiri dengan alhamdulillah', emoji: '👑', img: 'assets/MUHAMAD IHSAN AL ARABI.jpeg' },
-    { nama: 'BRIAN JANUARSA', peran: 'Wakil Ketua', motivasi: '-', emoji: '⭐', img: 'assets/BRIAN JANUARSA.jpeg' },
+    { nama: 'BRIAN JANUARSA', peran: 'Wakil Ketua', motivasi: 'Berpikir itu sulit, itulah mengapa kebanyakan orang lebih suka menilai', emoji: '⭐', img: 'assets/BRIAN JANUARSA.jpeg' },
     { nama: 'NAJMI AFIFAH J. SIREGAR', peran: 'Sekretaris', motivasi: 'Tulis motivasi singkat di sini.', emoji: '📝', img: 'assets/NAJMI AFIFAH J. SIREGAR.jpeg' },
     { nama: 'HAFSOH ZAHIDAH NAFISAH', peran: 'Bendahara', motivasi: '-', emoji: '💰', img: 'assets/HAFSOH ZAHIDAH NAFISAH.jpeg' },
     { nama: 'JESAR DIAN MUHAMMAD', peran: 'Duta Kampus', motivasi: 'Tulis motivasi singkat di sini.', emoji: '💰', img: 'assets/JESAR DIAN MUHAMMAD.jpeg' },
     { nama: 'Fachri Irsyad Suherman', peran: 'Coach ML', motivasi: 'Makan bisi marati', emoji: '🎮', img: 'assets/Fachri Irsyad Suherman.jpeg' },
     { nama: 'MUKTI ABIMANYU HARDI SUCIPTO', peran: 'Media Informasi', motivasi: 'ganteng itu luka', emoji: '⚡', img: "assets/MUKTI ABIMANYU HARDI SUCIPTO.jpeg" },
     { nama: 'Muhammad Fikry Auladi I', peran: 'Anggota', motivasi: 'homo proponit, sed Deus disponit', img: 'assets/Muhammad Fikry Auladi I.jpeg', emoji: '🔥' },
-    { nama: 'INTAN CAHYA PUTRI', peran: 'Anggota', motivasi: 'homo proponit, sed Deus disponit', emoji: '🌸', img: 'assets/INTAN CAHYA PUTRI.jpeg' },
+    { nama: 'INTAN CAHYA PUTRI', peran: 'Anggota', motivasi: 'Fortune favors the bold', emoji: '🌸', img: 'assets/INTAN CAHYA PUTRI.jpeg' },
     { nama: 'DARY DARWISY RAMDHANI', peran: 'Anggota', motivasi: 'Tak perlu banyak warna untuk terlihat nyata. Cukup hitam yang tegas, dan hati yang tahu ke mana harus pulang.', img: 'assets/darydarwisyramdhani.jpeg', emoji: '😎' },
     { nama: 'Ridhwan Sulaiman Suzana', peran: 'Anggota', motivasi: 'Coding boleh error, hidup jangan.', img: 'assets/ridwan.jpeg', emoji: '💻' },
     { nama: 'Nama Anggota 4', peran: 'Keamanan', motivasi: 'Tulis motivasi singkat di sini.', emoji: '🎮' },
