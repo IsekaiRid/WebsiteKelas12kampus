@@ -27,11 +27,11 @@ const anggota = [
 
 const barisTengah = 'flex max-w-full flex-wrap items-start justify-center gap-3.5';
 const tingkat = [
-    { peran: ['Ketua Kelas', 'Wakil Ketua'], wadah: barisTengah, lebar: 'w-[70%] max-w-[260px] min-[760px]:w-[230px]' },
-    { peran: ['Sekretaris', 'Bendahara'], wadah: barisTengah, lebar: 'w-[calc(50%-7px)] min-[760px]:w-[185px]' },
-    { peran: ['Duta Kampus'], wadah: barisTengah, lebar: 'w-[60%] max-w-[220px] min-[760px]:w-[200px]' },
-    { peran: ['Keamanan', 'Tukang pukul'], wadah: barisTengah, lebar: 'w-[60%] max-w-[220px] min-[760px]:w-[200px]' },
-    { peran: ['Coach ML', 'Media Informasi'], wadah: barisTengah, lebar: 'w-[60%] max-w-[220px] min-[760px]:w-[200px]' },
+    { peran: ['Ketua Kelas', 'Wakil Ketua'], wadah: barisTengah, lebar: 'w-[calc(50%-8px)] max-[420px]:w-full min-[760px]:w-[230px]' },
+    { peran: ['Sekretaris', 'Bendahara'], wadah: barisTengah, lebar: 'w-[calc(50%-8px)] max-[420px]:w-full min-[760px]:w-[185px]' },
+    { peran: ['Duta Kampus'], wadah: barisTengah, lebar: 'w-[calc(50%-8px)] max-[420px]:w-full min-[760px]:w-[200px]' },
+    { peran: ['Keamanan', 'Tukang pukul'], wadah: barisTengah, lebar: 'w-[calc(50%-8px)] max-[420px]:w-full min-[760px]:w-[200px]' },
+    { peran: ['Coach ML', 'Media Informasi'], wadah: barisTengah, lebar: 'w-[calc(50%-8px)] max-[420px]:w-full min-[760px]:w-[200px]' },
     {
         peran: ['Anggota'],
         wadah: 'grid w-full max-w-[1060px] grid-cols-2 gap-3.5 min-[560px]:grid-cols-3 min-[760px]:grid-cols-4 min-[1100px]:grid-cols-6',
@@ -123,7 +123,7 @@ const kartuAnggota = (a, lebar) => {
     const emoji = a.emoji || EMOJI_DEFAULT;
 
     return `
-    <${tag}${atribut} class="glass group relative block ${lebar} rounded-[18px] p-3 text-center ${efekKartu}">
+    <${tag}${atribut} class="glass group relative block ${lebar} max-w-full rounded-[18px] p-3 text-center ${efekKartu}">
       <!-- Emoji kustom di sudut kanan atas, miring -->
       <span
         class="pointer-events-none absolute -top-2 -right-2 z-10 grid size-9 place-items-center text-[1.5rem]  [transform:rotate(18deg)] transition-transform duration-300 group-hover:[transform:rotate(-8deg)_scale(1.15)]"
@@ -135,7 +135,7 @@ const kartuAnggota = (a, lebar) => {
             : `<span class="text-3xl font-bold text-accent" aria-hidden="true">${esc(inisial(a.nama))}</span>`}
         ${href ? `<span class="absolute right-2 bottom-2 grid size-8 place-items-center rounded-full bg-black/55 text-white backdrop-blur-sm transition duration-300 group-hover:bg-accent group-hover:text-gray-900">${ikonIg}</span>` : ''}
       </div>
-      <h3 class="text-[0.95rem] font-semibold">${esc(a.nama)}</h3>
+      <h3 class="break-words text-[0.95rem] font-semibold">${esc(a.nama)}</h3>
       <span class="mt-1.5 inline-block rounded-full bg-accent px-3 py-0.5 text-[0.7rem] font-semibold text-gray-900">${esc(a.peran)}</span>
       ${a.motivasi ? `<p class="mt-2.5 text-[0.78rem] leading-relaxed text-muted italic">&ldquo;${esc(a.motivasi)}&rdquo;</p>` : ''}
     </${tag}>`;
