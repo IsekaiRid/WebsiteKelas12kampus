@@ -9,6 +9,7 @@ const anggota = [
     { nama: 'Fachri Irsyad Suherman', peran: 'Coach ML', motivasi: 'Makan bisi marati', emoji: '🎮', img: 'assets/Fachri Irsyad Suherman.jpeg' },
     { nama: 'MUKTI ABIMANYU HARDI SUCIPTO', peran: 'Media Informasi', motivasi: 'ganteng itu luka', emoji: '⚡', img: "assets/MUKTI ABIMANYU HARDI SUCIPTO.jpeg" },
     { nama: 'Muhammad Fikry Auladi I', peran: 'Anggota', motivasi: 'homo proponit, sed Deus disponit', img: 'assets/Muhammad Fikry Auladi I.jpeg', emoji: '🔥' },
+    { nama: 'INTAN CAHYA PUTRI', peran: 'Anggota', motivasi: 'homo proponit, sed Deus disponit', img: 'assets/INTAN CAHYA PUTRI.jpeg', emoji: '🌸' },
     { nama: 'DARY DARWISY RAMDHANI', peran: 'Anggota', motivasi: 'Tak perlu banyak warna untuk terlihat nyata. Cukup hitam yang tegas, dan hati yang tahu ke mana harus pulang.', img: 'assets/darydarwisyramdhani.jpeg', emoji: '😎' },
     { nama: 'Ridhwan Sulaiman Suzana', peran: 'Anggota', motivasi: 'Coding boleh error, hidup jangan.', img: 'assets/ridwan.jpeg', emoji: '💻' },
     { nama: 'Nama Anggota 4', peran: 'Keamanan', motivasi: 'Tulis motivasi singkat di sini.', emoji: '🎮' },
@@ -110,8 +111,56 @@ const urlFoto = (p) => {
 };
 
 const ikonIg = `<svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" /></svg>`;
+const TINY_PLACEHOLDER = 'data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500"%3E%3Crect width="400" height="500" fill="%23161f2d"/%3E%3C/svg%3E';
 
 const efekKartu = 'transition duration-300 hover:-translate-y-1.5 hover:border-accent/70 hover:bg-white/10 hover:shadow-[0_18px_35px_rgba(0,0,0,0.3)]';
+
+const renderLazyImage = ({ src, alt, className }) => {
+    const url = urlFoto(src);
+    if (!url) return '';
+    return `<img class="${className} lazy-image" src="${TINY_PLACEHOLDER}" data-src="${esc(url)}" alt="${esc(alt)}" loading="lazy" decoding="async" fetchpriority="low" />`;
+};
+
+const setupLazyImages = () => {
+    const targets = document.querySelectorAll('img[data-src]');
+    if (!targets.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+        targets.forEach((img) => {
+            const src = img.dataset.src;
+            if (src) img.src = src;
+            delete img.dataset.src;
+        });
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const img = entry.target;
+            const src = img.dataset.src;
+            if (!src) {
+                obs.unobserve(img);
+                return;
+            }
+
+            const temp = new Image();
+            temp.onload = () => {
+                img.src = src;
+                img.removeAttribute('data-src');
+                img.classList.add('is-loaded');
+            };
+            temp.onerror = () => {
+                img.src = src;
+                img.removeAttribute('data-src');
+            };
+            temp.src = src;
+            obs.unobserve(img);
+        });
+    }, { rootMargin: '180px 0px' });
+
+    targets.forEach((img) => observer.observe(img));
+};
 
 const kartuAnggota = (a, lebar) => {
     const href = urlIg(a.ig);
@@ -131,7 +180,7 @@ const kartuAnggota = (a, lebar) => {
 
       <div class="relative mb-3 grid aspect-[4/5] w-full place-items-center overflow-hidden rounded-xl bg-white/10">
         ${(a.foto || a.img)
-            ? `<img class="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105" src="${esc(urlFoto(a.foto || a.img))}" alt="Foto ${esc(a.nama)}" loading="lazy" />`
+            ? renderLazyImage({ src: a.foto || a.img, alt: `Foto ${a.nama}`, className: 'absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105' })
             : `<span class="text-3xl font-bold text-accent" aria-hidden="true">${esc(inisial(a.nama))}</span>`}
         ${href ? `<span class="absolute right-2 bottom-2 grid size-8 place-items-center rounded-full bg-black/55 text-white backdrop-blur-sm transition duration-300 group-hover:bg-accent group-hover:text-gray-900">${ikonIg}</span>` : ''}
       </div>
@@ -150,6 +199,8 @@ document.getElementById('member-grid').innerHTML = tingkat
             .join('')}</div>`;
     })
     .join('');
+
+setupLazyImages();
 
 document.getElementById('karya-list').innerHTML = karya
     .map(
@@ -177,7 +228,7 @@ const kartuKegiatan = (k) => {
     <${tag}${atribut} class="glass group flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-[18px] min-[760px]:w-[calc((100%-1rem)/2)] min-[1100px]:w-[calc((100%-2rem)/3)] ${efekKartu}">
       <div class="relative grid aspect-video w-full place-items-center overflow-hidden bg-white/10">
         ${k.url_image
-            ? `<img class="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105" src="${esc(urlFoto(k.url_image))}" alt="Dokumentasi ${esc(k.nama)}" loading="lazy" />`
+            ? renderLazyImage({ src: k.url_image, alt: `Dokumentasi ${k.nama}`, className: 'absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105' })
             : '<span class="text-sm text-white/50">Foto belum ditambahkan</span>'}
         ${href ? `<span class="absolute right-2 bottom-2 grid size-8 place-items-center rounded-full bg-black/55 text-white backdrop-blur-sm transition duration-300 group-hover:bg-accent group-hover:text-gray-900">${ikonIg}</span>` : ''}
       </div>
@@ -191,6 +242,7 @@ const kartuKegiatan = (k) => {
 
 const eventList = document.getElementById('event-list');
 eventList.innerHTML = kegiatan.map(kartuKegiatan).join('');
+setupLazyImages();
 
 /* ==========================================================
    CAROUSEL EVENTS

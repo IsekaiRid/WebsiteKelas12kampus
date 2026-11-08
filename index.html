@@ -284,7 +284,7 @@
   <!-- ===== Loading Screen ===== -->
   <div id="loading-screen" class="loading-screen" role="status" aria-live="polite" aria-label="Memuat portofolio">
     <div class="loading-photo">
-      <img src="assets/kami.png" alt="Foto kelas 12 D4"
+      <img src="assets/kami.png" alt="Foto kelas 12 D4" loading="eager" fetchpriority="high" decoding="async"
         onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'fallback\'>12 D4</div>';" />
     </div>
     <p class="loading-text">Besama<span> Kami</span> Kita jaga Lingkungan</p>
@@ -341,7 +341,8 @@
             class="order-first m-0 flex w-full items-center justify-center [perspective:1200px] min-[1100px]:order-none">
             <div
               class="relative inline-block w-full max-w-[520px] rounded-[28px] border border-white/20 bg-gradient-to-br from-white/40 to-white/10 p-2.5 shadow-[0_25px_45px_rgba(0,0,0,0.22)] transition-[transform,translate,box-shadow] duration-500 before:pointer-events-none before:absolute before:inset-2 before:rounded-[22px] before:border before:border-white/20 hover:-translate-y-1.5 hover:shadow-[0_35px_55px_rgba(0,0,0,0.28)] min-[1100px]:p-3 min-[1100px]:[transform:rotateY(-10deg)_rotateX(3deg)] min-[1100px]:hover:[transform:rotateY(-4deg)_rotateX(1deg)]">
-              <img src="assets/aggota.png" alt="Foto bersama anggota kelas 12 D4"
+              <img src="assets/aggota.png" alt="Foto bersama anggota kelas 12 D4" loading="eager" fetchpriority="high"
+                decoding="async"
                 class="block h-auto w-full rounded-[20px] bg-white/10 object-cover saturate-90 contrast-110 min-[1100px]:max-h-[calc(100vh-160px)]" />
             </div>
           </figure>
